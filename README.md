@@ -104,3 +104,151 @@ Example 3
 > 11
 Error: can't generate a secret number with a length of 11 because there aren't enough unique digits
 ```
+# Stage 4/7
+
+## Description
+In this stage, you should combine all the previous parts into a simple playable version of the "Bulls and Cows" game. First, prompt the player to input the length of the secret code. The length will determine the difficulty level for the current game session. The program should generate a secret code of the given length. Remember that it should consist of unique numbers.
+
+Then, the game starts and the program prompts the player to guess the code. When the player inputs a number, the program should grade it in bulls and cows. The game goes on until the code is guessed, that is, until the number of bulls is equal to the number of digits in the code. When the game ends, the program should finish its execution.
+
+## Objectives
+In this stage, your program should:
+
+1. Ask for the length of the secret code and then generate the code.
+2. Wait for the user input.
+3. Grade the guessing attempt in bulls and cows.
+4. If the secret code has been guessed, the program stops; otherwise, return to the second step.
+
+## Example
+```
+Please, enter the secret code's length:
+> 4
+Okay, let's start a game!
+Turn 1:
+> 1234
+Grade: 1 bull and 1 cow
+Turn 2:
+> 7354
+Grade: 2 bulls and 1 cow
+Turn 3:
+> 9374
+Grade: 4 bulls
+Congratulations! You guessed the secret code.
+```
+# Stage 5/7
+
+## Description
+The algorithm suggested for generating the secret code in the previous stage was honestly a “reinvention of the wheel”. Java already has the tools for generating random numbers! Research some common pseudo-random generation methods such as Math.random() and Random class. Choose the method you like and use it to rewrite the secret code generation.
+
+Nothing else is supposed to change at this stage: the program asks for the length, generates a secret code, and then receives and grades the attempts until the code is guessed. Your task here is to rewrite the code generator without breaking the existing code.
+
+## Objectives
+In this stage, rewrite the secret code generator using a suitable Java method.
+
+## Example
+```
+Please, enter the secret code's length:
+> 4
+Okay, let's start a game!
+Turn 1:
+> 1234
+Grade: 1 bull and 1 cow
+Turn 2:
+> 7354
+Grade: 2 bulls and 1 cow
+Turn 3:
+> 9374
+Grade: 4 bulls
+Congratulations! You guessed the secret code.
+```
+
+# Stage 6/7
+
+## Description
+Some players need a challenge, so let's make the secret code in the game harder to guess. Add support for more than 10 symbols by adding letters. Now, the secret code can contain numbers 0-9 and lowercase Latin characters a-z. The new maximum length for the code is 36. Note that the length of the secret word may not match the size of possible characters in the secret code, so you should make two separate inputs for the secret code length and for the size of possible characters.
+
+Also, since a secret code is not a number anymore, the symbol 0 should be allowed as the first character in a secret code.
+
+## Objectives
+In this step, your program should:
+
+1. Ask for the length of the secret code.
+2. Ask for the range of possible characters in the secret code.
+3. Generate a secret code using numbers and characters. This time, you should also print the secret code using * characters and print which characters were used to generate the secret code.
+4. Function as a fully playable game.
+
+## Example
+```
+Input the length of the secret code:
+> 4
+Input the number of possible symbols in the code:
+> 16
+The secret is prepared: **** (0-9, a-f).
+Okay, let's start a game!
+Turn 1:
+> 1a34
+Grade: 1 bull and 1 cow
+Turn 2:
+> b354
+Grade: 2 bulls and 1 cow
+Turn 3:
+> 93b4
+Grade: 4 bulls
+Congratulations! You guessed the secret code.
+```
+
+# Stage 7/7
+
+## Description
+There are a lot of error possibilities. What if someone enters an answer of the wrong length? Or the number of possible symbols is less than the length of the code? What if the answer contains invalid symbols? The game may crash before the secret number was guessed!
+
+Let's handle errors like this. At this point, you can implement this without the try catch construction. Use the following rule of thumb: if you can avoid the exception-based logic, avoid it! If you use exceptions in normal situations, how would you deal with unusual (exceptional) situations? Now it may not seem that important, but when you need to find errors in more complex programs, this makes a difference.
+
+## Objectives
+In this stage, your program should:
+
+1. Handle incorrect input.
+2. Print an error message that contains the word error. After that, don't ask for the numbers again, just finish the program.
+
+## Example
+Example 1
+```
+Input the length of the secret code:
+> 6
+Input the number of possible symbols in the code:
+> 5
+Error: it's not possible to generate a code with a length of 6 with 5 unique symbols.
+```
+Example 2
+```
+Input the length of the secret code:
+> abc 0 -7
+Error: "abc 0 -7" isn't a valid number.
+```
+Example 3
+```
+Input the length of the secret code:
+> 6
+Input the number of possible symbols in the code:
+> 37
+Error: maximum number of possible symbols in the code is 36 (0-9, a-z).
+```
+Example 4
+```
+Input the length of the secret code:
+> 4
+Input the number of possible symbols in the code:
+> 12
+The secret is prepared: **** (0-9, a-b).
+Okay, let's start a game!
+Turn 1:
+> a234
+Grade: 1 bull and 1 cow
+Turn 2:
+> 73b4
+Grade: 2 bulls and 1 cow
+Turn 3:
+> 9374
+Grage: 4 bulls
+Congratulations! You guessed the secret code.
+```
